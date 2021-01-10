@@ -1,0 +1,7 @@
+int x = 32
+double x = 32
+char x = "a"
+str x = "abc"
+list x = []
+map x = {}
+
