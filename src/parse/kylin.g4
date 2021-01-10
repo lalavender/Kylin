@@ -1,412 +1,447 @@
 grammar kylin;
-
 /*
- * 语法规则
+ * parse grammer
  */
 
-tokens { INDENT, DEDENT }
-//Note the indentation of code inside
-
-@lexer::header{
-from antlr4.Token import CommonToken
-import re
-import importlib
-
-# Allow languages to extend the lexer and parser, by loading the parser dynamically
-module_path = __name__[:-5]
-language_name = __name__.split('.')[-1]
-language_name = language_name[:-5]  # Remove Lexer from name
-LanguageParser = getattr(importlib.import_module('{}Parser'.format(module_path)), '{}Parser'.format(language_name))
-}
-
-@lexer::members {
-@property
-def tokens(self):
-    try:
-        return self._tokens
-    except AttributeError:
-        self._tokens = []
-        return self._tokens
-
-@property
-def indents(self):
-    try:
-        return self._indents
-    except AttributeError:
-        self._indents = []
-        return self._indents
-
-@property
-def opened(self):
-    try:
-        return self._opened
-    except AttributeError:
-        self._opened = 0
-        return self._opened
-
-@opened.setter
-def opened(self, value):
-    self._opened = value
-
-@property
-def lastToken(self):
-    try:
-        return self._lastToken
-    except AttributeError:
-        self._lastToken = None
-        return self._lastToken
-
-@lastToken.setter
-def lastToken(self, value):
-    self._lastToken = value
-
-def reset(self):
-    super().reset()
-    self.tokens = []
-    self.indents = []
-    self.opened = 0
-    self.lastToken = None
-
-def emitToken(self, t):
-    super().emitToken(t)
-    self.tokens.append(t)
-
-def nextToken(self):
-    if self._input.LA(1) == Token.EOF and self.indents:
-        for i in range(len(self.tokens)-1,-1,-1):
-            if self.tokens[i].type == Token.EOF:
-                self.tokens.pop(i)
-
-        self.emitToken(self.commonToken(LanguageParser.NEWLINE, '\n'))
-        while self.indents:
-            self.emitToken(self.createDedent())
-            self.indents.pop()
-
-        self.emitToken(self.commonToken(LanguageParser.EOF, "<EOF>"))
-    next = super().nextToken()
-    if next.channel == Token.DEFAULT_CHANNEL:
-        self.lastToken = next
-    return next if not self.tokens else self.tokens.pop(0)
-
-def createDedent(self):
-    dedent = self.commonToken(LanguageParser.DEDENT, "")
-    dedent.line = self.lastToken.line
-    return dedent
-
-def commonToken(self, type, text, indent=0):
-    stop = self.getCharIndex()-1-indent
-    start = (stop - len(text) + 1) if text else stop
-    return CommonToken(self._tokenFactorySourcePair, type, super().DEFAULT_TOKEN_CHANNEL, start, stop)
-
-@staticmethod
-def getIndentationCount(spaces):
-    count = 0
-    for ch in spaces:
-        if ch == '\t':
-            count += 8 - (count % 8)
-        else:
-            count += 1
-    return count
-
-def atStartOfInput(self):
-    return Lexer.column.fget(self) == 0 and Lexer.line.fget(self) == 1
-}
-
-
-
-single_input: NEWLINE | simple_stmt | compound_stmt NEWLINE;
-file_input: (NEWLINE | stmt)* EOF;
-eval_input: testlist NEWLINE* EOF; 
-
-
-
-
-
-//文件导入
-import_stmt: import_name | import_from;
-
-import_name: 'import' dotted_as_names;
-//注意：（'.'|'...'）是必需的，因为'...'被标记为ELLIPSIS
-import_from
-    : ('from' (('.' | '...')* dotted_name
-    | ('.' | '...')+)
-    'import' ('*' | '(' import_as_names ')'
-    | import_as_names))
+ //源文件
+sourceFile
+    : packageClause eos (importDecl eos)* ((functionDecl | declaration) eos)*
     ;
 
-import_as_names
-    : import_as_name (',' import_as_name)* (',')?
+ //定义包
+packageClause
+    : 'package' IDENTIFIER
+    ;
+ //声明导入
+importDecl
+    : 'import' (importSpec | '(' (importSpec eos)* ')')
+    ;
+ //指定导入
+importSpec
+    : ('.' | IDENTIFIER)? importPath
+    ;
+ 
+//导入路径
+importPath
+    : string_
+    ;
+ //声明类型合集
+declaration
+    : constDecl
+    | typeDecl
+    | varDecl
+    ;
+ //常量声明
+constDecl
+    : 'const' (constSpec | '(' (constSpec eos)* ')')
+    ;
+//常量表达式
+constSpec
+    : identifierList (type_? '=' expressionList)?
     ;
 
-import_as_name: NAME ('as' NAME)?;
-dotted_as_names: dotted_as_name (',' dotted_as_name)*;
-dotted_as_name: dotted_name ('as' NAME)?;
-dotted_name: NAME ('.' NAME)*;
-
-
-
-//类定义表达式
-classdef
-    : 'class' NAME ('(' (arglist)? ')')? ':' suite
+//标识符集合
+identifierList
+    : IDENTIFIER (',' IDENTIFIER)*
+    ;
+//表达式集合
+expressionList
+    : expression (',' expression)*
     ;
 
-//类参数列表
-arglist
-    : argument (',' argument)*  (',')?
+//执行类型
+typeDecl
+    : 'type' (typeSpec | '(' (typeSpec eos)* ')')
+    ;
+//类型重命名
+typeSpec
+    : IDENTIFIER ASSIGN? type_
     ;
 
-//类参数
-argument
-    : ( test (comp_for)?
-    | test '=' test
-    |'**' test
-    |'*' test )
+//函数声明
+functionDecl
+    : 'func' IDENTIFIER (signature block?)
     ;
-
-comp_for
-    : 'for' exprlist 'in' or_test (comp_iter)?
+//变量声明
+varDecl
+    : 'let' (varSpec | '(' (varSpec eos)* ')')
     ;
-comp_iter
-    : comp_for
-    | comp_if
+//指定变量
+varSpec
+    : identifierList (type_ ('=' expressionList)? | '=' expressionList)
     ;
-comp_if: 'if' test_nocond (comp_iter)?;
-test_nocond
-    : or_test ;
-
-//函数定义推导式
-funcdef
-    : 'func' NAME parameters ('->' type_specifier)? ':' suite
+//区域
+block
+    : '{' statementList? '}'
     ;
-//表达式内部推导式
-suite
-    : simple_stmt
-    | NEWLINE INDENT stmt+ DEDENT
+//声明列表
+statementList
+    : (statement eos)+
     ;
-
-simple_stmt
-    : small_stmt (';' small_stmt)* (';')? NEWLINE
+//声明表达式
+statement
+    : declaration
+    | simpleStmt
+    | returnStmt
+    | breakStmt
+    | continueStmt
+    | gotoStmt
+    | fallthroughStmt
+    | block
+    | ifStmt
+    | switchStmt
+    | forStmt
+    | deferStmt
     ;
-
-small_stmt
-    : (expr_stmt
-    | del_stmt
-    | pass_stmt
-    | flow_stmt
-    | import_stmt)
+//简单声明
+simpleStmt
+    : expressionStmt
+    | incDecStmt
+    | assignment
+    | shortVarDecl
+    | emptyStmt
     ;
-
-expr_stmt
-    : testlist_star_expr
-    (annassign | augassign ( testlist)
-    | testlist_star_expr)*
+//表达式声明
+expressionStmt
+    : expression
     ;
-//
-annassign: ':' test ('=' test)?;
-
-augassign: ('+=' | '-=' | '*=' | '@=' | '/=' | '%=' | '&=' | '|=' | '^=' |
-            '<<=' | '>>=' | '**=' | '//=');
-
-testlist_star_expr
-    : (test|star_expr) (',' (test|star_expr))* (',')?
+//自增自减表达式
+incDecStmt
+    : expression (PLUS_PLUS | MINUS_MINUS)
     ;
-
-
-stmt
-    : simple_stmt
-    | compound_stmt
+//运算表达式
+assignment
+    : expressionList assign_op expressionList
     ;
-
-
-//跳转表达式
-flow_stmt
-    : break_stmt
-    | continue_stmt
-    | return_stmt
-    | raise_stmt
+//操作符
+assign_op
+    : ('+' | '-' | '|' | '^' | '*' | '/' | '%' | '<<' | '>>' | '&' | '&^')? '='
     ;
-
-//raise表达式
-raise_stmt
-    : 'raise' (test ('from' test)?)?
+//变量推导声明
+shortVarDecl
+    : identifierList ':=' expressionList
     ;
-
-//复合表达式
-compound_stmt
-    : if_stmt
-    | while_stmt
-    | for_stmt
-    | funcdef
-    | classdef
+//空声明
+emptyStmt
+    : ';'
     ;
-
+//返回值声明
+returnStmt
+    : 'return' expressionList?
+    ;
+//break声明
+breakStmt
+    : 'break' IDENTIFIER?
+    ;
+//continue声明
+continueStmt
+    : 'continue' IDENTIFIER?
+    ;
+//goto声明
+gotoStmt
+    : 'goto' IDENTIFIER
+    ;
+//fallthrough声明
+fallthroughStmt
+    : 'fallthrough'
+    ;
+//defer声明
+deferStmt
+    : 'defer' expression
+    ;
 //if表达式
-if_stmt
-    : 'if' test ':' suite ('elif' test ':' suite)* ('else' ':' suite)?
+ifStmt
+    : 'if' (simpleStmt ';')? expression block ('else' (ifStmt | block))?
+    ;
+//switch表达式
+switchStmt
+    : exprSwitchStmt
+    | typeSwitchStmt
+    ;
+//switch表达式
+exprSwitchStmt
+    : 'switch' (simpleStmt ';')? expression? '{' exprCaseClause* '}'
     ;
 
-//while表达式
-while_stmt
-    : 'while' test ':' suite ('else' ':' suite)?
+//case 判断表达式
+exprCaseClause
+    : exprSwitchCase ':' statementList?
+    ;
+//case表达式
+exprSwitchCase
+    : 'case' expressionList
+    | 'default'
     ;
 
-//for表达式
-for_stmt
-    : 'for' exprlist 'in' testlist ':' suite ('else' ':' suite)?
+typeSwitchStmt
+    : 'switch' (simpleStmt ';')? typeSwitchGuard '{' typeCaseClause* '}'
     ;
 
-//删除表达式
-del_stmt: 'del' exprlist;
+typeSwitchGuard
+    : (IDENTIFIER ':=')? primaryExpr '.' '(' 'type' ')'
+    ;
 
-//
-exprlist: (expr|star_expr) (',' (expr|star_expr))* (',')?;
+typeCaseClause
+    : typeSwitchCase ':' statementList?
+    ;
 
+typeSwitchCase
+    : 'case' typeList
+    | 'default'
+    ;
+
+typeList
+    : (type_ | NONE) (',' (type_ | NONE))*
+    ;
+
+//for 表达式
+forStmt
+    : 'for' (expression | forClause | rangeClause)? block
+    ;
+//for 判断条件
+forClause
+    : simpleStmt? ';' expression? ';' simpleStmt?
+    ;
+//range判断
+rangeClause
+    : (expressionList '=' | identifierList ':=')? 'range' expression
+    ;
+//定义类型
+type_
+    : typeName
+    | typeLit
+    | '(' type_ ')'
+    ;
+//定义类型名称
+typeName
+    : IDENTIFIER
+    | qualifiedIdent
+    ;
+
+//类型集合
+typeLit
+    : arrayType
+    | pointerType
+    | functionType
+    | interfaceType
+    | listType
+    | mapType
+    | channelType
+    ;
+//数组类型
+arrayType
+    : '[' arrayLength ']' elementType
+    ;
+//数组长度
+arrayLength
+    : expression
+    ;
+//数组元素类型
+elementType
+    : type_
+    ;
+//指针类型
+pointerType
+    : '*' type_
+    ;
+//接口类型
+interfaceType
+    : 'interface' '{' (methodSpec eos)* '}'
+    ;
+//切片类型
+listType
+    : '[' ']' elementType
+    ;
+
+// It's possible to replace `type` with more restricted typeLit list and also pay attention to nil maps
+//字典类型
+mapType
+    : 'map' '[' type_ ']' elementType
+    ;
+//通道类型
+channelType
+    : ('chan' | 'chan' '<-' | '<-' 'chan') elementType
+    ;
+//方法
+methodSpec
+    : {noTerminatorAfterParams(2)}? IDENTIFIER parameters result
+    | typeName
+    | IDENTIFIER parameters
+    ;
+//函数类型
+functionType
+    : 'func' signature
+    ;
 //函数参数
-parameters              : '(' (typedargslist)? ')';
-
-
-
-//判断表达式集合
-testlist: test (',' test)* (',')?;
-
-
-
-//类型说明符
-type_specifier
-    :   ('void'
-    |   'char'
-    |   'int'
-    |   'float'
-    |   'double'
-    |   'signed'
-    |   'unsigned')
-    |   enum_specifier
-    |   typedef_name
+signature
+    : {noTerminatorAfterParams(1)}? parameters result
+    | parameters
+    ;
+//返回值
+result
+    : parameters
+    | type_
+    ;
+//参数
+parameters
+    : '(' (parameterDecl (COMMA parameterDecl)* COMMA?)? ')'
+    ;
+//参数声明
+parameterDecl
+    : identifierList? '...'? type_
+    ;
+//基本表达式
+expression
+    : primaryExpr
+    | unaryExpr
+    | expression ('*' | '/' | '%' | '<<' | '>>' | '&' | '&^') expression
+    | expression ('+' | '-' | '|' | '^') expression
+    | expression ('==' | '!=' | '<' | '<=' | '>' | '>=') expression
+    | expression '&&' expression
+    | expression '||' expression
+    ;
+//主要表达式
+primaryExpr
+    : operand
+    | conversion
+    | primaryExpr ( DOT IDENTIFIER
+                  | index
+                  | typeAssertion
+                  | arguments)
+    ;
+//一元表达式
+unaryExpr
+    : primaryExpr
+    | ('+' | '-' | '!' | '^' | '*' | '&' | '<-') expression
+    ;
+//类型转换
+conversion
+    : type_ '(' expression ','? ')'
+    ;
+//操作符
+operand
+    : literal
+    | operandName
+    | '(' expression ')'
+    ;
+//字面量
+literal
+    : basicLit
+    | compositeLit
+    | functionLit
+    ;
+//基本类型
+basicLit
+    : NONE
+    | integer
+    | string_
+    | FLOAT_LIT
+    | IMAGINARY_LIT
+    | RUNE_LIT
+    ;
+//整形
+integer
+    : DECIMAL_LIT
+    | OCTAL_LIT
+    | HEX_LIT
+    | IMAGINARY_LIT
+    | RUNE_LIT
     ;
 
-
-typedef_name
-    :   IDENTIFIER
+operandName
+    : IDENTIFIER
+    | qualifiedIdent
     ;
 
-
-//枚举说明符
-enum_specifier
-    :   'enum' IDENTIFIER? '{' enumerator_list '}'
-    |   'enum' IDENTIFIER? '{' enumerator_list ',' '}'
-    |   'enum' IDENTIFIER
+qualifiedIdent
+    : IDENTIFIER '.' IDENTIFIER
     ;
 
-enumerator_list
-    :   enumerator
-    |   enumerator_list ',' enumerator
+compositeLit
+    : literalType literalValue
+    ;
+//字面量类型
+literalType
+    :
+    | arrayType
+    | '[' '...' ']' elementType
+    | listType
+    | mapType
+    | typeName
+    ;
+//字面量的值
+literalValue
+    : '{' (elementList ','?)? '}'
+    ;
+//元素集合
+elementList
+    : keyedElement (',' keyedElement)*
     ;
 
-enumerator
-    :   enumeration_constant
+keyedElement
+    : (key ':')? element
+    ;
+//关键字
+key
+    : IDENTIFIER
+    | expression
+    | literalValue
+    ;
+//元素
+element
+    : expression
+    | literalValue
     ;
 
-enumeration_constant
-    :   IDENTIFIER
+string_
+    : RAW_STRING_LIT
+    | INTERPRETED_STRING_LIT
     ;
 
-star_expr
-    : '*' expr
+anonymousField
+    : '*'? typeName
     ;
 
-expr
-    : xor_expr ('|' xor_expr)*;
-
-xor_expr
-    : and_expr ('^' and_expr)*;
-
-and_expr
-    : shift_expr ('&' shift_expr)*;
-
-shift_expr
-    : arith_expr (('<<'|'>>') arith_expr)*;
-
-arith_expr
-    : term (('+'|'-') term)*;
-
-term
-    : factor (('*'|'@'|'/'|'%'|'//') factor)*;
-
-factor
-    : ('+'|'-'|'~') factor
+functionLit
+    : 'func' signature block // function
     ;
 
-
-
-
-//空函数占位符
-pass_stmt               : 'pass';
-
-
-
-typedargslist
-    : (tfpdef ('=' test)? (',' tfpdef ('=' test)?)* (',' (
-        '*' (tfpdef)? (',' tfpdef ('=' test)?)* (',' ('**' tfpdef (',')?)?)?
-    | '**' tfpdef (',')?)?)?
-    | '*' (tfpdef)? (',' tfpdef ('=' test)?)* (',' ('**' tfpdef (',')?)?)?
-    | '**' tfpdef (',')?);
-
-tfpdef: NAME (':' test)?;
-
-//判断表达式
-test
-    : or_test ('if' or_test 'else' test)?
+index
+    : '[' expression ']'
     ;
-
-//or表达式
-or_test
-    : and_test ('or' and_test)*
+//类型断言
+typeAssertion
+    : '.' '(' type_ ')'
     ;
-
-//and表达式
-and_test
-    : not_test ('and' not_test)*
+//参数
+arguments
+    : '(' ((expressionList | type_ (',' expressionList)?) '...'? ','?)? ')'
     ;
+//方法调用
 
-//not表达式
-not_test
-    : 'not' not_test
-    | comparison
+//结束符
+eos
+    : ';'
+    | EOF
     ;
-//比较表达式
-comparison: expr (comp_op expr)*;
-
-//比较操作符
-comp_op: '<'|'>'|'=='|'>='|'<='|'<>'|'!='|'in'|'not' 'in'|'is'|'is' 'not';
-
-//函数返回表达式
-return_stmt             : 'return' (testlist)?;
-
-//break表达式
-break_stmt              : 'break';
-
-//continue表达式
-continue_stmt           : 'continue';
-
 
 /*
- * 词法规则
+ * 词法分析
  */
-
-//关键字
-
-FUNC                   : 'func';
 BREAK                  : 'break';
 DEFAULT                : 'default';
+FUNC                   : 'func';
+INTERFACE              : 'interface';
 CASE                   : 'case';
+DEFER                  : 'defer';
 MAP                    : 'map';
-STRUCT                 : 'struct';
 CHAN                   : 'chan';
 ELSE                   : 'else';
 GOTO                   : 'goto';
 PACKAGE                : 'package';
 SWITCH                 : 'switch';
 CONST                  : 'const';
+FALLTHROUGH            : 'fallthrough';
 IF                     : 'if';
 RANGE                  : 'range';
 TYPE                   : 'type';
@@ -415,11 +450,14 @@ FOR                    : 'for';
 IMPORT                 : 'import';
 RETURN                 : 'return';
 LET                    : 'let';
-AS                     : 'as';
-//标识符
+TRUE                   : 'true';
+FALSE                  : 'false';
+NONE                   : 'none';
+
 IDENTIFIER             : LETTER (LETTER | UNICODE_DIGIT)*;
 
-//标记符号
+// Punctuation
+
 L_PAREN                : '(';
 R_PAREN                : ')';
 L_CURLY                : '{';
@@ -436,12 +474,13 @@ MINUS_MINUS            : '--';
 DECLARE_ASSIGN         : ':=';
 ELLIPSIS               : '...';
 
-//逻辑符号
+// Logical
+
 LOGICAL_OR             : '||';
 LOGICAL_AND            : '&&';
-EXCLAMATION            : '!';
 
-//关系运算符
+// Relation operators
+
 EQUALS                 : '==';
 NOT_EQUALS             : '!=';
 LESS                   : '<';
@@ -449,7 +488,8 @@ LESS_OR_EQUALS         : '<=';
 GREATER                : '>';
 GREATER_OR_EQUALS      : '>=';
 
-//算术运算符
+// Arithmetic operators
+
 OR                     : '|';
 DIV                    : '/';
 MOD                    : '%';
@@ -457,7 +497,10 @@ LSHIFT                 : '<<';
 RSHIFT                 : '>>';
 BIT_CLEAR              : '&^';
 
-//混合运算符
+// 一元操作符
+EXCLAMATION            : '!';
+
+// 混合操作符
 PLUS                   : '+';
 MINUS                  : '-';
 CARET                  : '^';
@@ -465,39 +508,7 @@ STAR                   : '*';
 AMPERSAND              : '&';
 RECEIVE                : '<-';
 
-NAME
- : ID_START ID_CONTINUE*
- ;
-
-
-
-//注释和空白等忽略的信息
-Whitespace
-    :   [ \t]+
-        -> skip
-    ;
-
-//新的一行的注释
-NEWLINE
-    :   (   '\r' '\n'?
-        |   '\n'
-        )
-        -> skip
-    ;
-
-//块注释
-BlockComment
-    :   '/*' .*? '*/'
-        -> skip
-    ;
-//行注释
-LineComment
-    :   '//' ~[\r\n]*
-        -> skip
-    ;
-
-
-//字面量
+// 数字字面量
 DECIMAL_LIT            : [1-9] [0-9]*;
 OCTAL_LIT              : '0' OCTAL_DIGIT*;
 HEX_LIT                : '0' [xX] HEX_DIGIT+;
@@ -508,46 +519,54 @@ FLOAT_LIT              : DECIMALS ('.' DECIMALS? EXPONENT? | EXPONENT)
 
 IMAGINARY_LIT          : (DECIMALS | FLOAT_LIT) 'i';
 
-//标识符开始
-fragment ID_START
- : '_'
- | [A-Z]
- | [a-z]
- ;
+// 符文文字
+RUNE_LIT               : '\'' (~[\n\\] | ESCAPED_VALUE) '\'';
 
-//标识符第二个字母之后
-fragment ID_CONTINUE
- : ID_START
- | [0-9]
- ;
+//字符串
+RAW_STRING_LIT         : '`' ~'`'*                      '`';
+INTERPRETED_STRING_LIT : '"' (~["\\] | ESCAPED_VALUE)*  '"';
 
-//十进制
+//隐藏
+WS                     : [ \t]+             -> channel(HIDDEN);
+COMMENT                : '/*' .*? '*/'      -> channel(HIDDEN);
+TERMINATOR             : [\r\n]+            -> channel(HIDDEN);
+LINE_COMMENT           : '//' ~[\r\n]*      -> channel(HIDDEN);
+
+// Fragments
+fragment ESCAPED_VALUE
+    : '\\' ('u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+           | 'U' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+           | [abfnrtv\\'"]
+           | OCTAL_DIGIT OCTAL_DIGIT OCTAL_DIGIT
+           | 'x' HEX_DIGIT HEX_DIGIT)
+    ;
+
 fragment DECIMALS
     : [0-9]+
     ;
-//八进制
+
 fragment OCTAL_DIGIT
     : [0-7]
     ;
-//十六进制
+
 fragment HEX_DIGIT
     : [0-9a-fA-F]
     ;
-//指数
+
 fragment EXPONENT
     : [eE] [+-]? DECIMALS
     ;
 
-//unicode
 fragment LETTER
     : UNICODE_LETTER
     | '_'
     ;
 
+//unicode 数字
 fragment UNICODE_DIGIT
     : [\u0030-\u0039]
     ;
-
+//unicode 集合
 fragment UNICODE_LETTER
     : [\u0041-\u005A]
     ;

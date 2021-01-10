@@ -8,75 +8,534 @@ else:
 # This class defines a complete listener for a parse tree produced by kylinParser.
 class kylinListener(ParseTreeListener):
 
-    # Enter a parse tree produced by kylinParser#single_input.
-    def enterSingle_input(self, ctx:kylinParser.Single_inputContext):
+    # Enter a parse tree produced by kylinParser#sourceFile.
+    def enterSourceFile(self, ctx:kylinParser.SourceFileContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#single_input.
-    def exitSingle_input(self, ctx:kylinParser.Single_inputContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#file_input.
-    def enterFile_input(self, ctx:kylinParser.File_inputContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#file_input.
-    def exitFile_input(self, ctx:kylinParser.File_inputContext):
+    # Exit a parse tree produced by kylinParser#sourceFile.
+    def exitSourceFile(self, ctx:kylinParser.SourceFileContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#eval_input.
-    def enterEval_input(self, ctx:kylinParser.Eval_inputContext):
+    # Enter a parse tree produced by kylinParser#packageClause.
+    def enterPackageClause(self, ctx:kylinParser.PackageClauseContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#eval_input.
-    def exitEval_input(self, ctx:kylinParser.Eval_inputContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#decorator.
-    def enterDecorator(self, ctx:kylinParser.DecoratorContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#decorator.
-    def exitDecorator(self, ctx:kylinParser.DecoratorContext):
+    # Exit a parse tree produced by kylinParser#packageClause.
+    def exitPackageClause(self, ctx:kylinParser.PackageClauseContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#decorators.
-    def enterDecorators(self, ctx:kylinParser.DecoratorsContext):
+    # Enter a parse tree produced by kylinParser#importDecl.
+    def enterImportDecl(self, ctx:kylinParser.ImportDeclContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#decorators.
-    def exitDecorators(self, ctx:kylinParser.DecoratorsContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#decorated.
-    def enterDecorated(self, ctx:kylinParser.DecoratedContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#decorated.
-    def exitDecorated(self, ctx:kylinParser.DecoratedContext):
+    # Exit a parse tree produced by kylinParser#importDecl.
+    def exitImportDecl(self, ctx:kylinParser.ImportDeclContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#async_funcdef.
-    def enterAsync_funcdef(self, ctx:kylinParser.Async_funcdefContext):
+    # Enter a parse tree produced by kylinParser#importSpec.
+    def enterImportSpec(self, ctx:kylinParser.ImportSpecContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#async_funcdef.
-    def exitAsync_funcdef(self, ctx:kylinParser.Async_funcdefContext):
+    # Exit a parse tree produced by kylinParser#importSpec.
+    def exitImportSpec(self, ctx:kylinParser.ImportSpecContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#funcdef.
-    def enterFuncdef(self, ctx:kylinParser.FuncdefContext):
+    # Enter a parse tree produced by kylinParser#importPath.
+    def enterImportPath(self, ctx:kylinParser.ImportPathContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#funcdef.
-    def exitFuncdef(self, ctx:kylinParser.FuncdefContext):
+    # Exit a parse tree produced by kylinParser#importPath.
+    def exitImportPath(self, ctx:kylinParser.ImportPathContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#declaration.
+    def enterDeclaration(self, ctx:kylinParser.DeclarationContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#declaration.
+    def exitDeclaration(self, ctx:kylinParser.DeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#constDecl.
+    def enterConstDecl(self, ctx:kylinParser.ConstDeclContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#constDecl.
+    def exitConstDecl(self, ctx:kylinParser.ConstDeclContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#constSpec.
+    def enterConstSpec(self, ctx:kylinParser.ConstSpecContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#constSpec.
+    def exitConstSpec(self, ctx:kylinParser.ConstSpecContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#identifierList.
+    def enterIdentifierList(self, ctx:kylinParser.IdentifierListContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#identifierList.
+    def exitIdentifierList(self, ctx:kylinParser.IdentifierListContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#expressionList.
+    def enterExpressionList(self, ctx:kylinParser.ExpressionListContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#expressionList.
+    def exitExpressionList(self, ctx:kylinParser.ExpressionListContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#typeDecl.
+    def enterTypeDecl(self, ctx:kylinParser.TypeDeclContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#typeDecl.
+    def exitTypeDecl(self, ctx:kylinParser.TypeDeclContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#typeSpec.
+    def enterTypeSpec(self, ctx:kylinParser.TypeSpecContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#typeSpec.
+    def exitTypeSpec(self, ctx:kylinParser.TypeSpecContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#functionDecl.
+    def enterFunctionDecl(self, ctx:kylinParser.FunctionDeclContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#functionDecl.
+    def exitFunctionDecl(self, ctx:kylinParser.FunctionDeclContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#varDecl.
+    def enterVarDecl(self, ctx:kylinParser.VarDeclContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#varDecl.
+    def exitVarDecl(self, ctx:kylinParser.VarDeclContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#varSpec.
+    def enterVarSpec(self, ctx:kylinParser.VarSpecContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#varSpec.
+    def exitVarSpec(self, ctx:kylinParser.VarSpecContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#block.
+    def enterBlock(self, ctx:kylinParser.BlockContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#block.
+    def exitBlock(self, ctx:kylinParser.BlockContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#statementList.
+    def enterStatementList(self, ctx:kylinParser.StatementListContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#statementList.
+    def exitStatementList(self, ctx:kylinParser.StatementListContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#statement.
+    def enterStatement(self, ctx:kylinParser.StatementContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#statement.
+    def exitStatement(self, ctx:kylinParser.StatementContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#simpleStmt.
+    def enterSimpleStmt(self, ctx:kylinParser.SimpleStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#simpleStmt.
+    def exitSimpleStmt(self, ctx:kylinParser.SimpleStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#expressionStmt.
+    def enterExpressionStmt(self, ctx:kylinParser.ExpressionStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#expressionStmt.
+    def exitExpressionStmt(self, ctx:kylinParser.ExpressionStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#incDecStmt.
+    def enterIncDecStmt(self, ctx:kylinParser.IncDecStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#incDecStmt.
+    def exitIncDecStmt(self, ctx:kylinParser.IncDecStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#assignment.
+    def enterAssignment(self, ctx:kylinParser.AssignmentContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#assignment.
+    def exitAssignment(self, ctx:kylinParser.AssignmentContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#assign_op.
+    def enterAssign_op(self, ctx:kylinParser.Assign_opContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#assign_op.
+    def exitAssign_op(self, ctx:kylinParser.Assign_opContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#shortVarDecl.
+    def enterShortVarDecl(self, ctx:kylinParser.ShortVarDeclContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#shortVarDecl.
+    def exitShortVarDecl(self, ctx:kylinParser.ShortVarDeclContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#emptyStmt.
+    def enterEmptyStmt(self, ctx:kylinParser.EmptyStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#emptyStmt.
+    def exitEmptyStmt(self, ctx:kylinParser.EmptyStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#returnStmt.
+    def enterReturnStmt(self, ctx:kylinParser.ReturnStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#returnStmt.
+    def exitReturnStmt(self, ctx:kylinParser.ReturnStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#breakStmt.
+    def enterBreakStmt(self, ctx:kylinParser.BreakStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#breakStmt.
+    def exitBreakStmt(self, ctx:kylinParser.BreakStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#continueStmt.
+    def enterContinueStmt(self, ctx:kylinParser.ContinueStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#continueStmt.
+    def exitContinueStmt(self, ctx:kylinParser.ContinueStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#gotoStmt.
+    def enterGotoStmt(self, ctx:kylinParser.GotoStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#gotoStmt.
+    def exitGotoStmt(self, ctx:kylinParser.GotoStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#fallthroughStmt.
+    def enterFallthroughStmt(self, ctx:kylinParser.FallthroughStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#fallthroughStmt.
+    def exitFallthroughStmt(self, ctx:kylinParser.FallthroughStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#deferStmt.
+    def enterDeferStmt(self, ctx:kylinParser.DeferStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#deferStmt.
+    def exitDeferStmt(self, ctx:kylinParser.DeferStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#ifStmt.
+    def enterIfStmt(self, ctx:kylinParser.IfStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#ifStmt.
+    def exitIfStmt(self, ctx:kylinParser.IfStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#switchStmt.
+    def enterSwitchStmt(self, ctx:kylinParser.SwitchStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#switchStmt.
+    def exitSwitchStmt(self, ctx:kylinParser.SwitchStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#exprSwitchStmt.
+    def enterExprSwitchStmt(self, ctx:kylinParser.ExprSwitchStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#exprSwitchStmt.
+    def exitExprSwitchStmt(self, ctx:kylinParser.ExprSwitchStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#exprCaseClause.
+    def enterExprCaseClause(self, ctx:kylinParser.ExprCaseClauseContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#exprCaseClause.
+    def exitExprCaseClause(self, ctx:kylinParser.ExprCaseClauseContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#exprSwitchCase.
+    def enterExprSwitchCase(self, ctx:kylinParser.ExprSwitchCaseContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#exprSwitchCase.
+    def exitExprSwitchCase(self, ctx:kylinParser.ExprSwitchCaseContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#typeSwitchStmt.
+    def enterTypeSwitchStmt(self, ctx:kylinParser.TypeSwitchStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#typeSwitchStmt.
+    def exitTypeSwitchStmt(self, ctx:kylinParser.TypeSwitchStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#typeSwitchGuard.
+    def enterTypeSwitchGuard(self, ctx:kylinParser.TypeSwitchGuardContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#typeSwitchGuard.
+    def exitTypeSwitchGuard(self, ctx:kylinParser.TypeSwitchGuardContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#typeCaseClause.
+    def enterTypeCaseClause(self, ctx:kylinParser.TypeCaseClauseContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#typeCaseClause.
+    def exitTypeCaseClause(self, ctx:kylinParser.TypeCaseClauseContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#typeSwitchCase.
+    def enterTypeSwitchCase(self, ctx:kylinParser.TypeSwitchCaseContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#typeSwitchCase.
+    def exitTypeSwitchCase(self, ctx:kylinParser.TypeSwitchCaseContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#typeList.
+    def enterTypeList(self, ctx:kylinParser.TypeListContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#typeList.
+    def exitTypeList(self, ctx:kylinParser.TypeListContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#forStmt.
+    def enterForStmt(self, ctx:kylinParser.ForStmtContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#forStmt.
+    def exitForStmt(self, ctx:kylinParser.ForStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#forClause.
+    def enterForClause(self, ctx:kylinParser.ForClauseContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#forClause.
+    def exitForClause(self, ctx:kylinParser.ForClauseContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#rangeClause.
+    def enterRangeClause(self, ctx:kylinParser.RangeClauseContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#rangeClause.
+    def exitRangeClause(self, ctx:kylinParser.RangeClauseContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#type_.
+    def enterType_(self, ctx:kylinParser.Type_Context):
+        pass
+
+    # Exit a parse tree produced by kylinParser#type_.
+    def exitType_(self, ctx:kylinParser.Type_Context):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#typeName.
+    def enterTypeName(self, ctx:kylinParser.TypeNameContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#typeName.
+    def exitTypeName(self, ctx:kylinParser.TypeNameContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#typeLit.
+    def enterTypeLit(self, ctx:kylinParser.TypeLitContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#typeLit.
+    def exitTypeLit(self, ctx:kylinParser.TypeLitContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#arrayType.
+    def enterArrayType(self, ctx:kylinParser.ArrayTypeContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#arrayType.
+    def exitArrayType(self, ctx:kylinParser.ArrayTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#arrayLength.
+    def enterArrayLength(self, ctx:kylinParser.ArrayLengthContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#arrayLength.
+    def exitArrayLength(self, ctx:kylinParser.ArrayLengthContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#elementType.
+    def enterElementType(self, ctx:kylinParser.ElementTypeContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#elementType.
+    def exitElementType(self, ctx:kylinParser.ElementTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#pointerType.
+    def enterPointerType(self, ctx:kylinParser.PointerTypeContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#pointerType.
+    def exitPointerType(self, ctx:kylinParser.PointerTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#interfaceType.
+    def enterInterfaceType(self, ctx:kylinParser.InterfaceTypeContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#interfaceType.
+    def exitInterfaceType(self, ctx:kylinParser.InterfaceTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#listType.
+    def enterListType(self, ctx:kylinParser.ListTypeContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#listType.
+    def exitListType(self, ctx:kylinParser.ListTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#mapType.
+    def enterMapType(self, ctx:kylinParser.MapTypeContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#mapType.
+    def exitMapType(self, ctx:kylinParser.MapTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#channelType.
+    def enterChannelType(self, ctx:kylinParser.ChannelTypeContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#channelType.
+    def exitChannelType(self, ctx:kylinParser.ChannelTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#methodSpec.
+    def enterMethodSpec(self, ctx:kylinParser.MethodSpecContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#methodSpec.
+    def exitMethodSpec(self, ctx:kylinParser.MethodSpecContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#functionType.
+    def enterFunctionType(self, ctx:kylinParser.FunctionTypeContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#functionType.
+    def exitFunctionType(self, ctx:kylinParser.FunctionTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#signature.
+    def enterSignature(self, ctx:kylinParser.SignatureContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#signature.
+    def exitSignature(self, ctx:kylinParser.SignatureContext):
+        pass
+
+
+    # Enter a parse tree produced by kylinParser#result.
+    def enterResult(self, ctx:kylinParser.ResultContext):
+        pass
+
+    # Exit a parse tree produced by kylinParser#result.
+    def exitResult(self, ctx:kylinParser.ResultContext):
         pass
 
 
@@ -89,696 +548,228 @@ class kylinListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#typedargslist.
-    def enterTypedargslist(self, ctx:kylinParser.TypedargslistContext):
+    # Enter a parse tree produced by kylinParser#parameterDecl.
+    def enterParameterDecl(self, ctx:kylinParser.ParameterDeclContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#typedargslist.
-    def exitTypedargslist(self, ctx:kylinParser.TypedargslistContext):
+    # Exit a parse tree produced by kylinParser#parameterDecl.
+    def exitParameterDecl(self, ctx:kylinParser.ParameterDeclContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#tfpdef.
-    def enterTfpdef(self, ctx:kylinParser.TfpdefContext):
+    # Enter a parse tree produced by kylinParser#expression.
+    def enterExpression(self, ctx:kylinParser.ExpressionContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#tfpdef.
-    def exitTfpdef(self, ctx:kylinParser.TfpdefContext):
+    # Exit a parse tree produced by kylinParser#expression.
+    def exitExpression(self, ctx:kylinParser.ExpressionContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#varargslist.
-    def enterVarargslist(self, ctx:kylinParser.VarargslistContext):
+    # Enter a parse tree produced by kylinParser#primaryExpr.
+    def enterPrimaryExpr(self, ctx:kylinParser.PrimaryExprContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#varargslist.
-    def exitVarargslist(self, ctx:kylinParser.VarargslistContext):
+    # Exit a parse tree produced by kylinParser#primaryExpr.
+    def exitPrimaryExpr(self, ctx:kylinParser.PrimaryExprContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#vfpdef.
-    def enterVfpdef(self, ctx:kylinParser.VfpdefContext):
+    # Enter a parse tree produced by kylinParser#unaryExpr.
+    def enterUnaryExpr(self, ctx:kylinParser.UnaryExprContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#vfpdef.
-    def exitVfpdef(self, ctx:kylinParser.VfpdefContext):
+    # Exit a parse tree produced by kylinParser#unaryExpr.
+    def exitUnaryExpr(self, ctx:kylinParser.UnaryExprContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#stmt.
-    def enterStmt(self, ctx:kylinParser.StmtContext):
+    # Enter a parse tree produced by kylinParser#conversion.
+    def enterConversion(self, ctx:kylinParser.ConversionContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#stmt.
-    def exitStmt(self, ctx:kylinParser.StmtContext):
+    # Exit a parse tree produced by kylinParser#conversion.
+    def exitConversion(self, ctx:kylinParser.ConversionContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#simple_stmt.
-    def enterSimple_stmt(self, ctx:kylinParser.Simple_stmtContext):
+    # Enter a parse tree produced by kylinParser#operand.
+    def enterOperand(self, ctx:kylinParser.OperandContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#simple_stmt.
-    def exitSimple_stmt(self, ctx:kylinParser.Simple_stmtContext):
+    # Exit a parse tree produced by kylinParser#operand.
+    def exitOperand(self, ctx:kylinParser.OperandContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#small_stmt.
-    def enterSmall_stmt(self, ctx:kylinParser.Small_stmtContext):
+    # Enter a parse tree produced by kylinParser#literal.
+    def enterLiteral(self, ctx:kylinParser.LiteralContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#small_stmt.
-    def exitSmall_stmt(self, ctx:kylinParser.Small_stmtContext):
+    # Exit a parse tree produced by kylinParser#literal.
+    def exitLiteral(self, ctx:kylinParser.LiteralContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#expr_stmt.
-    def enterExpr_stmt(self, ctx:kylinParser.Expr_stmtContext):
+    # Enter a parse tree produced by kylinParser#basicLit.
+    def enterBasicLit(self, ctx:kylinParser.BasicLitContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#expr_stmt.
-    def exitExpr_stmt(self, ctx:kylinParser.Expr_stmtContext):
+    # Exit a parse tree produced by kylinParser#basicLit.
+    def exitBasicLit(self, ctx:kylinParser.BasicLitContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#annassign.
-    def enterAnnassign(self, ctx:kylinParser.AnnassignContext):
+    # Enter a parse tree produced by kylinParser#integer.
+    def enterInteger(self, ctx:kylinParser.IntegerContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#annassign.
-    def exitAnnassign(self, ctx:kylinParser.AnnassignContext):
+    # Exit a parse tree produced by kylinParser#integer.
+    def exitInteger(self, ctx:kylinParser.IntegerContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#testlist_star_expr.
-    def enterTestlist_star_expr(self, ctx:kylinParser.Testlist_star_exprContext):
+    # Enter a parse tree produced by kylinParser#operandName.
+    def enterOperandName(self, ctx:kylinParser.OperandNameContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#testlist_star_expr.
-    def exitTestlist_star_expr(self, ctx:kylinParser.Testlist_star_exprContext):
+    # Exit a parse tree produced by kylinParser#operandName.
+    def exitOperandName(self, ctx:kylinParser.OperandNameContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#augassign.
-    def enterAugassign(self, ctx:kylinParser.AugassignContext):
+    # Enter a parse tree produced by kylinParser#qualifiedIdent.
+    def enterQualifiedIdent(self, ctx:kylinParser.QualifiedIdentContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#augassign.
-    def exitAugassign(self, ctx:kylinParser.AugassignContext):
+    # Exit a parse tree produced by kylinParser#qualifiedIdent.
+    def exitQualifiedIdent(self, ctx:kylinParser.QualifiedIdentContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#del_stmt.
-    def enterDel_stmt(self, ctx:kylinParser.Del_stmtContext):
+    # Enter a parse tree produced by kylinParser#compositeLit.
+    def enterCompositeLit(self, ctx:kylinParser.CompositeLitContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#del_stmt.
-    def exitDel_stmt(self, ctx:kylinParser.Del_stmtContext):
+    # Exit a parse tree produced by kylinParser#compositeLit.
+    def exitCompositeLit(self, ctx:kylinParser.CompositeLitContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#pass_stmt.
-    def enterPass_stmt(self, ctx:kylinParser.Pass_stmtContext):
+    # Enter a parse tree produced by kylinParser#literalType.
+    def enterLiteralType(self, ctx:kylinParser.LiteralTypeContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#pass_stmt.
-    def exitPass_stmt(self, ctx:kylinParser.Pass_stmtContext):
+    # Exit a parse tree produced by kylinParser#literalType.
+    def exitLiteralType(self, ctx:kylinParser.LiteralTypeContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#flow_stmt.
-    def enterFlow_stmt(self, ctx:kylinParser.Flow_stmtContext):
+    # Enter a parse tree produced by kylinParser#literalValue.
+    def enterLiteralValue(self, ctx:kylinParser.LiteralValueContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#flow_stmt.
-    def exitFlow_stmt(self, ctx:kylinParser.Flow_stmtContext):
+    # Exit a parse tree produced by kylinParser#literalValue.
+    def exitLiteralValue(self, ctx:kylinParser.LiteralValueContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#break_stmt.
-    def enterBreak_stmt(self, ctx:kylinParser.Break_stmtContext):
+    # Enter a parse tree produced by kylinParser#elementList.
+    def enterElementList(self, ctx:kylinParser.ElementListContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#break_stmt.
-    def exitBreak_stmt(self, ctx:kylinParser.Break_stmtContext):
+    # Exit a parse tree produced by kylinParser#elementList.
+    def exitElementList(self, ctx:kylinParser.ElementListContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#continue_stmt.
-    def enterContinue_stmt(self, ctx:kylinParser.Continue_stmtContext):
+    # Enter a parse tree produced by kylinParser#keyedElement.
+    def enterKeyedElement(self, ctx:kylinParser.KeyedElementContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#continue_stmt.
-    def exitContinue_stmt(self, ctx:kylinParser.Continue_stmtContext):
+    # Exit a parse tree produced by kylinParser#keyedElement.
+    def exitKeyedElement(self, ctx:kylinParser.KeyedElementContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#return_stmt.
-    def enterReturn_stmt(self, ctx:kylinParser.Return_stmtContext):
+    # Enter a parse tree produced by kylinParser#key.
+    def enterKey(self, ctx:kylinParser.KeyContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#return_stmt.
-    def exitReturn_stmt(self, ctx:kylinParser.Return_stmtContext):
+    # Exit a parse tree produced by kylinParser#key.
+    def exitKey(self, ctx:kylinParser.KeyContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#yield_stmt.
-    def enterYield_stmt(self, ctx:kylinParser.Yield_stmtContext):
+    # Enter a parse tree produced by kylinParser#element.
+    def enterElement(self, ctx:kylinParser.ElementContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#yield_stmt.
-    def exitYield_stmt(self, ctx:kylinParser.Yield_stmtContext):
+    # Exit a parse tree produced by kylinParser#element.
+    def exitElement(self, ctx:kylinParser.ElementContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#raise_stmt.
-    def enterRaise_stmt(self, ctx:kylinParser.Raise_stmtContext):
+    # Enter a parse tree produced by kylinParser#string_.
+    def enterString_(self, ctx:kylinParser.String_Context):
         pass
 
-    # Exit a parse tree produced by kylinParser#raise_stmt.
-    def exitRaise_stmt(self, ctx:kylinParser.Raise_stmtContext):
+    # Exit a parse tree produced by kylinParser#string_.
+    def exitString_(self, ctx:kylinParser.String_Context):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#import_stmt.
-    def enterImport_stmt(self, ctx:kylinParser.Import_stmtContext):
+    # Enter a parse tree produced by kylinParser#anonymousField.
+    def enterAnonymousField(self, ctx:kylinParser.AnonymousFieldContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#import_stmt.
-    def exitImport_stmt(self, ctx:kylinParser.Import_stmtContext):
+    # Exit a parse tree produced by kylinParser#anonymousField.
+    def exitAnonymousField(self, ctx:kylinParser.AnonymousFieldContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#import_name.
-    def enterImport_name(self, ctx:kylinParser.Import_nameContext):
+    # Enter a parse tree produced by kylinParser#functionLit.
+    def enterFunctionLit(self, ctx:kylinParser.FunctionLitContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#import_name.
-    def exitImport_name(self, ctx:kylinParser.Import_nameContext):
+    # Exit a parse tree produced by kylinParser#functionLit.
+    def exitFunctionLit(self, ctx:kylinParser.FunctionLitContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#import_from.
-    def enterImport_from(self, ctx:kylinParser.Import_fromContext):
+    # Enter a parse tree produced by kylinParser#index.
+    def enterIndex(self, ctx:kylinParser.IndexContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#import_from.
-    def exitImport_from(self, ctx:kylinParser.Import_fromContext):
+    # Exit a parse tree produced by kylinParser#index.
+    def exitIndex(self, ctx:kylinParser.IndexContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#import_as_name.
-    def enterImport_as_name(self, ctx:kylinParser.Import_as_nameContext):
+    # Enter a parse tree produced by kylinParser#typeAssertion.
+    def enterTypeAssertion(self, ctx:kylinParser.TypeAssertionContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#import_as_name.
-    def exitImport_as_name(self, ctx:kylinParser.Import_as_nameContext):
+    # Exit a parse tree produced by kylinParser#typeAssertion.
+    def exitTypeAssertion(self, ctx:kylinParser.TypeAssertionContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#dotted_as_name.
-    def enterDotted_as_name(self, ctx:kylinParser.Dotted_as_nameContext):
+    # Enter a parse tree produced by kylinParser#arguments.
+    def enterArguments(self, ctx:kylinParser.ArgumentsContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#dotted_as_name.
-    def exitDotted_as_name(self, ctx:kylinParser.Dotted_as_nameContext):
+    # Exit a parse tree produced by kylinParser#arguments.
+    def exitArguments(self, ctx:kylinParser.ArgumentsContext):
         pass
 
 
-    # Enter a parse tree produced by kylinParser#import_as_names.
-    def enterImport_as_names(self, ctx:kylinParser.Import_as_namesContext):
+    # Enter a parse tree produced by kylinParser#eos.
+    def enterEos(self, ctx:kylinParser.EosContext):
         pass
 
-    # Exit a parse tree produced by kylinParser#import_as_names.
-    def exitImport_as_names(self, ctx:kylinParser.Import_as_namesContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#dotted_as_names.
-    def enterDotted_as_names(self, ctx:kylinParser.Dotted_as_namesContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#dotted_as_names.
-    def exitDotted_as_names(self, ctx:kylinParser.Dotted_as_namesContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#dotted_name.
-    def enterDotted_name(self, ctx:kylinParser.Dotted_nameContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#dotted_name.
-    def exitDotted_name(self, ctx:kylinParser.Dotted_nameContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#global_stmt.
-    def enterGlobal_stmt(self, ctx:kylinParser.Global_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#global_stmt.
-    def exitGlobal_stmt(self, ctx:kylinParser.Global_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#nonlocal_stmt.
-    def enterNonlocal_stmt(self, ctx:kylinParser.Nonlocal_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#nonlocal_stmt.
-    def exitNonlocal_stmt(self, ctx:kylinParser.Nonlocal_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#assert_stmt.
-    def enterAssert_stmt(self, ctx:kylinParser.Assert_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#assert_stmt.
-    def exitAssert_stmt(self, ctx:kylinParser.Assert_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#compound_stmt.
-    def enterCompound_stmt(self, ctx:kylinParser.Compound_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#compound_stmt.
-    def exitCompound_stmt(self, ctx:kylinParser.Compound_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#async_stmt.
-    def enterAsync_stmt(self, ctx:kylinParser.Async_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#async_stmt.
-    def exitAsync_stmt(self, ctx:kylinParser.Async_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#if_stmt.
-    def enterIf_stmt(self, ctx:kylinParser.If_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#if_stmt.
-    def exitIf_stmt(self, ctx:kylinParser.If_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#while_stmt.
-    def enterWhile_stmt(self, ctx:kylinParser.While_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#while_stmt.
-    def exitWhile_stmt(self, ctx:kylinParser.While_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#for_stmt.
-    def enterFor_stmt(self, ctx:kylinParser.For_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#for_stmt.
-    def exitFor_stmt(self, ctx:kylinParser.For_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#try_stmt.
-    def enterTry_stmt(self, ctx:kylinParser.Try_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#try_stmt.
-    def exitTry_stmt(self, ctx:kylinParser.Try_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#with_stmt.
-    def enterWith_stmt(self, ctx:kylinParser.With_stmtContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#with_stmt.
-    def exitWith_stmt(self, ctx:kylinParser.With_stmtContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#with_item.
-    def enterWith_item(self, ctx:kylinParser.With_itemContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#with_item.
-    def exitWith_item(self, ctx:kylinParser.With_itemContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#except_clause.
-    def enterExcept_clause(self, ctx:kylinParser.Except_clauseContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#except_clause.
-    def exitExcept_clause(self, ctx:kylinParser.Except_clauseContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#suite.
-    def enterSuite(self, ctx:kylinParser.SuiteContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#suite.
-    def exitSuite(self, ctx:kylinParser.SuiteContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#test.
-    def enterTest(self, ctx:kylinParser.TestContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#test.
-    def exitTest(self, ctx:kylinParser.TestContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#test_nocond.
-    def enterTest_nocond(self, ctx:kylinParser.Test_nocondContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#test_nocond.
-    def exitTest_nocond(self, ctx:kylinParser.Test_nocondContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#lambdef.
-    def enterLambdef(self, ctx:kylinParser.LambdefContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#lambdef.
-    def exitLambdef(self, ctx:kylinParser.LambdefContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#lambdef_nocond.
-    def enterLambdef_nocond(self, ctx:kylinParser.Lambdef_nocondContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#lambdef_nocond.
-    def exitLambdef_nocond(self, ctx:kylinParser.Lambdef_nocondContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#or_test.
-    def enterOr_test(self, ctx:kylinParser.Or_testContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#or_test.
-    def exitOr_test(self, ctx:kylinParser.Or_testContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#and_test.
-    def enterAnd_test(self, ctx:kylinParser.And_testContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#and_test.
-    def exitAnd_test(self, ctx:kylinParser.And_testContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#not_test.
-    def enterNot_test(self, ctx:kylinParser.Not_testContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#not_test.
-    def exitNot_test(self, ctx:kylinParser.Not_testContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#comparison.
-    def enterComparison(self, ctx:kylinParser.ComparisonContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#comparison.
-    def exitComparison(self, ctx:kylinParser.ComparisonContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#comp_op.
-    def enterComp_op(self, ctx:kylinParser.Comp_opContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#comp_op.
-    def exitComp_op(self, ctx:kylinParser.Comp_opContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#star_expr.
-    def enterStar_expr(self, ctx:kylinParser.Star_exprContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#star_expr.
-    def exitStar_expr(self, ctx:kylinParser.Star_exprContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#expr.
-    def enterExpr(self, ctx:kylinParser.ExprContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#expr.
-    def exitExpr(self, ctx:kylinParser.ExprContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#xor_expr.
-    def enterXor_expr(self, ctx:kylinParser.Xor_exprContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#xor_expr.
-    def exitXor_expr(self, ctx:kylinParser.Xor_exprContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#and_expr.
-    def enterAnd_expr(self, ctx:kylinParser.And_exprContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#and_expr.
-    def exitAnd_expr(self, ctx:kylinParser.And_exprContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#shift_expr.
-    def enterShift_expr(self, ctx:kylinParser.Shift_exprContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#shift_expr.
-    def exitShift_expr(self, ctx:kylinParser.Shift_exprContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#arith_expr.
-    def enterArith_expr(self, ctx:kylinParser.Arith_exprContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#arith_expr.
-    def exitArith_expr(self, ctx:kylinParser.Arith_exprContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#term.
-    def enterTerm(self, ctx:kylinParser.TermContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#term.
-    def exitTerm(self, ctx:kylinParser.TermContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#factor.
-    def enterFactor(self, ctx:kylinParser.FactorContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#factor.
-    def exitFactor(self, ctx:kylinParser.FactorContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#power.
-    def enterPower(self, ctx:kylinParser.PowerContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#power.
-    def exitPower(self, ctx:kylinParser.PowerContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#atom_expr.
-    def enterAtom_expr(self, ctx:kylinParser.Atom_exprContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#atom_expr.
-    def exitAtom_expr(self, ctx:kylinParser.Atom_exprContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#atom.
-    def enterAtom(self, ctx:kylinParser.AtomContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#atom.
-    def exitAtom(self, ctx:kylinParser.AtomContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#testlist_comp.
-    def enterTestlist_comp(self, ctx:kylinParser.Testlist_compContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#testlist_comp.
-    def exitTestlist_comp(self, ctx:kylinParser.Testlist_compContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#trailer.
-    def enterTrailer(self, ctx:kylinParser.TrailerContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#trailer.
-    def exitTrailer(self, ctx:kylinParser.TrailerContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#subscriptlist.
-    def enterSubscriptlist(self, ctx:kylinParser.SubscriptlistContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#subscriptlist.
-    def exitSubscriptlist(self, ctx:kylinParser.SubscriptlistContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#subscript.
-    def enterSubscript(self, ctx:kylinParser.SubscriptContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#subscript.
-    def exitSubscript(self, ctx:kylinParser.SubscriptContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#sliceop.
-    def enterSliceop(self, ctx:kylinParser.SliceopContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#sliceop.
-    def exitSliceop(self, ctx:kylinParser.SliceopContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#exprlist.
-    def enterExprlist(self, ctx:kylinParser.ExprlistContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#exprlist.
-    def exitExprlist(self, ctx:kylinParser.ExprlistContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#testlist.
-    def enterTestlist(self, ctx:kylinParser.TestlistContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#testlist.
-    def exitTestlist(self, ctx:kylinParser.TestlistContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#dictorsetmaker.
-    def enterDictorsetmaker(self, ctx:kylinParser.DictorsetmakerContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#dictorsetmaker.
-    def exitDictorsetmaker(self, ctx:kylinParser.DictorsetmakerContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#classdef.
-    def enterClassdef(self, ctx:kylinParser.ClassdefContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#classdef.
-    def exitClassdef(self, ctx:kylinParser.ClassdefContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#arglist.
-    def enterArglist(self, ctx:kylinParser.ArglistContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#arglist.
-    def exitArglist(self, ctx:kylinParser.ArglistContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#argument.
-    def enterArgument(self, ctx:kylinParser.ArgumentContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#argument.
-    def exitArgument(self, ctx:kylinParser.ArgumentContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#comp_iter.
-    def enterComp_iter(self, ctx:kylinParser.Comp_iterContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#comp_iter.
-    def exitComp_iter(self, ctx:kylinParser.Comp_iterContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#comp_for.
-    def enterComp_for(self, ctx:kylinParser.Comp_forContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#comp_for.
-    def exitComp_for(self, ctx:kylinParser.Comp_forContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#comp_if.
-    def enterComp_if(self, ctx:kylinParser.Comp_ifContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#comp_if.
-    def exitComp_if(self, ctx:kylinParser.Comp_ifContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#encoding_decl.
-    def enterEncoding_decl(self, ctx:kylinParser.Encoding_declContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#encoding_decl.
-    def exitEncoding_decl(self, ctx:kylinParser.Encoding_declContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#yield_expr.
-    def enterYield_expr(self, ctx:kylinParser.Yield_exprContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#yield_expr.
-    def exitYield_expr(self, ctx:kylinParser.Yield_exprContext):
-        pass
-
-
-    # Enter a parse tree produced by kylinParser#yield_arg.
-    def enterYield_arg(self, ctx:kylinParser.Yield_argContext):
-        pass
-
-    # Exit a parse tree produced by kylinParser#yield_arg.
-    def exitYield_arg(self, ctx:kylinParser.Yield_argContext):
+    # Exit a parse tree produced by kylinParser#eos.
+    def exitEos(self, ctx:kylinParser.EosContext):
         pass
 
 
